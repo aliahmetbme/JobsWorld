@@ -1,4 +1,4 @@
-import { View, Text, Button, FlatList ,useWindowDimensions} from 'react-native'
+import { View, Text, Button, FlatList ,useWindowDimensions, SafeAreaView} from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -20,17 +20,17 @@ const Jobs = ({navigation}) => {
   const isLargeScreen = dimensions.width >= 768;
 
   try {return (
-    <View style={{flex:1,backgroundColor:backgroundColor}}>
+    <SafeAreaView style={{flex:1,backgroundColor:"white"}}>
       <FlatList
         data={data}
-        showsHorizontalScrollIndicator={true}
+        showsHorizontalScrollIndicator={true} 
         numColumns={isLargeScreen ? 2 : 1}
         renderItem={renderData}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.1}
         ListFooterComponent={renderFooter}>  
       </FlatList>
-    </View>
+    </SafeAreaView>
   )} catch (error) {
     console.log(error)
   }

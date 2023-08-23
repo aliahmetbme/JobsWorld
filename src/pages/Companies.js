@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, View , Text} from 'react-native'
+import { StyleSheet, FlatList, View , Text, SafeAreaView} from 'react-native'
 import React from 'react'
 import useFetch from '../Hooks/useFetch'
 import CompaniesCard from '../Components/CompaniesCard'
@@ -14,7 +14,7 @@ const Companies = () => {
   );}
   
  return (
-    <View style={{flex:1,backgroundColor:"white"}}>
+    <SafeAreaView style={{flex:1,backgroundColor:"white"}}>
       <FlatList
         data={data}
         renderItem={renderData}
@@ -22,7 +22,7 @@ const Companies = () => {
         onEndReachedThreshold={0.1}
         ListFooterComponent={renderFooter}>
       </FlatList>
-    </View>
+    </SafeAreaView>
   )
 }
 

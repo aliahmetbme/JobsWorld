@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flex:1,
     marginHorizontal:RFPercentage(1),
     margin:RFPercentage(1),
-    backgroundColor:accentColor, 
+    backgroundColor:"#DADADA", 
     padding:RFPercentage(1), 
     borderRadius:RFPercentage(1),
     elevation: 10,
