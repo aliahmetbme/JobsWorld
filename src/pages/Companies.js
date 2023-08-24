@@ -7,7 +7,6 @@ const URL = "https://www.themuse.com/api/public/companies"
 
 const Companies = () => {
   const {data, renderFooter, handleLoadMore} = useFetch(URL)
-  console.log(data, "companies")
   
   function renderData({item}) { return (
     <CompaniesCard items={item} ></CompaniesCard>

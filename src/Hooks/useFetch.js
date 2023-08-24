@@ -10,18 +10,14 @@ export default function useFetch(URL, id) {
 
   async function fetchData() {
     try {
-      console.log(page);
       setLoading(true);
       const res = !!id ? await axios.get(`${URL}/${id}`) :  await axios.get(`${URL}?page=${page}`);
-      console.log(`${URL}?page=${page}`);
       const newData = res.data; // API'den gelen veriler
-      console.log(page, "PAGE Control");
       if (page === 0) {
         !!id ? setData(newData): setData(newData.results);
       } else {
         !!id ? setData(newData): setData((data) => [...data, ...newData.results]);
       }
-      console.log(page, "PAGE");
       setLoading(false);
     } catch (error) {
       setLoading(false);
