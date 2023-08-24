@@ -1,16 +1,12 @@
-import { View, Text, Button, FlatList ,useWindowDimensions, SafeAreaView} from 'react-native'
+import { FlatList ,useWindowDimensions, SafeAreaView} from 'react-native'
 import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
 
 import JobsDetail from './JobsDetail';
-
-import { backgroundColor, accentColor } from '../Components/Colors';
 import useFetch from '../Hooks/useFetch';
 import JobsCard from '../Components/JobsCard';
+import CustomHeader from '../Components/CustomHeader';
 
 URL = "https://www.themuse.com/api/public/jobs"
-const Stack = createNativeStackNavigator()
 
 const Jobs = ({navigation}) => {
   
@@ -36,13 +32,5 @@ const Jobs = ({navigation}) => {
   }
 }
 
-const Navigation = () => {
-  return(
-      <Stack.Navigator screenOptions={{headerShown:false}}>
-        <Stack.Screen name='Jobs' component={Jobs}></Stack.Screen>  
-        <Stack.Screen name='JobDetail' component={JobsDetail}></Stack.Screen>
-      </Stack.Navigator>
-    )
-}
 
-export default Navigation
+export default Jobs

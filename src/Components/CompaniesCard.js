@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, Image , TouchableOpacity} from 'react-native'
 import React from 'react'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 
-const CompaniesCard = ({items}) => {
+const CompaniesCard = ({items, onPress}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <Text style={styles.title}>{items.name}</Text>
       <Image style={styles.Image} source={{uri: items.refs.logo_image}}></Image>
     </TouchableOpacity>

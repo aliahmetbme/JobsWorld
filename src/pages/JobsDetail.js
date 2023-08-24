@@ -17,12 +17,15 @@ const JobsDetail = ({ route }) => {
     }
     return (
         <ScrollView style={styles.container}>
+            <SafeAreaView>
             <Text style={styles.title}>{data.name}</Text>
             {data.contents ? (
                 <RenderHtml tagsStyles={styles.HTMLView} source={source} contentWidth={100} />
             ) : (
                 <Text>Loading</Text>
             )}
+                        </SafeAreaView>
+
         </ScrollView>
     );
 }

@@ -2,14 +2,19 @@ import { StyleSheet, FlatList, View , Text, SafeAreaView} from 'react-native'
 import React from 'react'
 import useFetch from '../Hooks/useFetch'
 import CompaniesCard from '../Components/CompaniesCard'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CompaniesDetails from './CompaniesDetails';
+import CustomHeader from '../Components/CustomHeader';
 
 const URL = "https://www.themuse.com/api/public/companies"
+const Stack = createNativeStackNavigator()
 
-const Companies = () => {
+
+const CompaniesPage = ({navigation}) => {
   const {data, renderFooter, handleLoadMore} = useFetch(URL)
   
   function renderData({item}) { return (
-    <CompaniesCard items={item} ></CompaniesCard>
+    <CompaniesCard onPress={() => navigation.navigate("CompaniesDetails")} items={item} ></CompaniesCard>
   );}
   
  return (
@@ -25,6 +30,7 @@ const Companies = () => {
   )
 }
 
-export default Companies
+
+export default CompaniesPage
 
 const styles = StyleSheet.create({})
