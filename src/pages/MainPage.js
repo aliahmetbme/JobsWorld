@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { green } from "../Components/Colors"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-
+import useBottomNavigatorVisible from '../Hooks/useBottomNavigatorVisible';
 import CustomHeader from '../Components/CustomHeader';
 
 import JobsPage from "./JobsPage"
@@ -15,7 +15,7 @@ import JobsDetail from './JobsDetail';
 import CompaniesPage from "./CompaniesPage"
 import CompaniesDetails from './CompaniesDetails';
 
-
+const Pages =  ['CompaniesDetails', 'JobDetail']
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -69,17 +69,11 @@ function MainPage({navigation}) {
 const JobNavigation = ({navigation , route}) => {
   const { landScape } = useLandScape();
 
-  React.useLayoutEffect(() => { 
-    const routeName = getFocusedRouteNameFromRoute(route);
-    if (routeName === "JobDetail"){
-      navigation.setOptions({tabBarStyle: {display: 'none'}});
-    }else {
-      navigation.setOptions({tabBarStyle: {
-        height: RFPercentage(landScape ? 8 : 10),
-        backgroundColor: green
-      }});
-    }
-}, [navigation, route]);
+  useBottomNavigatorVisible(
+    { Pages:Pages, Style : {height: RFPercentage(landScape ? 8 : 10),
+      backgroundColor: green} },
+    { route, navigation },
+  );
   return(
       <Stack.Navigator screenOptions={{headerShown:false}}>
         <Stack.Screen name='JobsPage' component={JobsPage}></Stack.Screen>  
@@ -99,17 +93,12 @@ const JobNavigation = ({navigation , route}) => {
 const CompanyNavigation = ({navigation, route}) => {
   const { landScape } = useLandScape();
 
-  React.useLayoutEffect(() => { 
-    const routeName = getFocusedRouteNameFromRoute(route);
-    if (routeName === "CompaniesDetails"){
-      navigation.setOptions({tabBarStyle: {display: 'none'}});
-    }else {
-      navigation.setOptions({tabBarStyle: {
-        height: RFPercentage(landScape ? 8 : 10),
-        backgroundColor: green
-      }});
-    }
-}, [navigation, route]);
+  useBottomNavigatorVisible(
+    { Pages:Pages, Style : {height: RFPercentage(landScape ? 8 : 10),
+      backgroundColor: green} },
+    { route, navigation },
+  );
+
   return(
       <Stack.Navigator screenOptions={{headerShown:false}}>
         <Stack.Screen name='CompaniesPage' component={CompaniesPage}></Stack.Screen>  
