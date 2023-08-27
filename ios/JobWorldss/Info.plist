@@ -42,6 +42,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
+		<string>Entypo.ttf</string>
+		<string>FontAwesome6Free-Regular.ttf</string>
+		<string>FontAwesome6Free-Solild.ttf</string>
 		<string>FontAwesome5_Solid.ttf</string>
 		<string>FontAwesome5_Regular.ttf</string>
 		<string>MaterialIcons.ttf</string>

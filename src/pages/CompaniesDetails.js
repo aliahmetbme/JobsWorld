@@ -3,7 +3,9 @@ import React, { useEffect } from 'react'
 import useFetch from '../Hooks/useFetch'
 import { useDispatch } from 'react-redux'
 import { RFPercentage } from 'react-native-responsive-fontsize'
-
+import Icon from "react-native-vector-icons/FontAwesome5"
+import LinkButton from '../Components/LinkButton'
+import { green, primaryColor } from '../Components/Colors'
 const URL = "https://www.themuse.com/api/public/companies"
 const CompaniesDetails = ({ route }) => {
   const id = route.params.id
@@ -11,7 +13,19 @@ const CompaniesDetails = ({ route }) => {
 
   const dispatch = useDispatch()
 
+
   try {
+    const converPublicationDate = (date) => {
+    
+      // Tarih dizesini Date nesnesine çevirme
+      const dateObject = new Date(date);
+    
+      // Tarihi istediğiniz formatında elde etme
+      const formattedDate = `${dateObject.getDate()} . ${dateObject.getMonth() + 1} . ${dateObject.getFullYear()}`;
+      
+      return formattedDate
+    }
+  
     useEffect(() => {
       if (data && data.refs && data.refs.logo_image) {
         dispatch({ type: "SET_IMAGE_SOURCE", payload: data.refs.logo_image });
@@ -33,12 +47,11 @@ const CompaniesDetails = ({ route }) => {
             <Image source={{ uri: data.refs.f3_image }}
               style={styles.Image}></Image>
           </View>
-          <View>
-            <Text style={styles.Descriptions}>Loacaitions : {data.locations[0].name}</Text>
-          </View>
-          <Text style={styles.Descriptions}>Industry: {data.industries[0].name}</Text>
-          <Text style={styles.Descriptions}>Publication Date: {data.publication_date}</Text>
-          <Text style={styles.Descriptions}>Company Size: {data.size.name}</Text>
+          <DescriptionsComp iconName={"search-location"} descriptionTitle={"Location"} descriptionData={data.locations[0].name}></DescriptionsComp>
+          <DescriptionsComp iconName={"industry"} descriptionTitle={"Industry"} descriptionData={data.industries[0].name}></DescriptionsComp>
+          <DescriptionsComp iconName={"business-time"} descriptionTitle={"Publication Date"} descriptionData={converPublicationDate(data.publication_date)}></DescriptionsComp>
+          <DescriptionsComp iconName={"user-friends"} descriptionTitle={"Company Size"} descriptionData={data.size.name}></DescriptionsComp>
+          <LinkButton title={"Go to companies webiste"}  url={data.refs.landing_page}></LinkButton>
         </View>
       )
     }
@@ -48,6 +61,15 @@ const CompaniesDetails = ({ route }) => {
 }
 
 export default CompaniesDetails
+
+const DescriptionsComp = ({iconName, descriptionTitle, descriptionData}) => {
+  return(
+    <View style={{flexDirection:"row", marginTop:RFPercentage(2)}}>
+    <Icon name={iconName} color="black" size={30} style={styles.Icon}></Icon>
+    <Text style={styles.Descriptions}>{descriptionTitle} : {descriptionData}</Text>
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -74,7 +96,10 @@ const styles = StyleSheet.create({
   },
   Descriptions: {
     padding: RFPercentage(1),
-    fontSize: RFPercentage(1.3),
-    fontWeight: "bold"
-  }
+    fontSize: RFPercentage(1.5),
+    fontWeight: "bold",
+    fontStyle:"italic",
+    color:primaryColor
+  },
+  Icon:{marginLeft:10}
 })

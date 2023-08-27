@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import useLandScape from '../Hooks/useLanspcape';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { green } from "../Components/Colors"
+import { accentColor, green, light_blue } from "../Components/Colors"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useBottomNavigatorVisible from '../Hooks/useBottomNavigatorVisible';
 import CustomHeader from '../Components/CustomHeader';
@@ -36,19 +36,15 @@ function MainPage({navigation}) {
 
           if (route.name === "Jobs") {
             iconName = focused ? "search-outline" : "search-circle-outline";
-            size = landScape ? (focused ? RFPercentage(4.75) : RFPercentage(3.5)) : (focused ? RFPercentage(5) : RFPercentage(3))
-            color = focused ? "white" : "gray";
+            size = landScape ? (focused ? RFPercentage(4.75) : RFPercentage(3.5)) : (focused ? RFPercentage(3) : RFPercentage(5))
+            color = focused ? "white" : "#DADADA";
           } else if (route.name === "Companies") {
             iconName = focused ? "storefront" : "storefront-outline";
-            size = landScape ? (focused ? RFPercentage(4.75) : RFPercentage(3.5)) : (focused ? RFPercentage(5) : RFPercentage(3))
-            color = focused ? "white" : "gray";
+            size = landScape ? (focused ? RFPercentage(4.75) : RFPercentage(3.5)) : (focused ? RFPercentage(3) : RFPercentage(5))
+            color = focused ? "white" : "#DADADA";
           }
 
           return <TabBarIcon color={color} size={size} iconName={iconName} />;
-        },
-        tabBarStyle: {
-          height: RFPercentage(landScape ? 8 : 10),
-          backgroundColor: green
         },
         headerShown: false,
         tabBarLabelStyle: {
@@ -57,7 +53,7 @@ function MainPage({navigation}) {
           fontSize: RFPercentage(1.85),
           paddingHorizontal: RFPercentage(1),
         },
-        tabBarShowLabel: !landScape
+        tabBarShowLabel: false
       })}
     >
       <Tab.Screen name="Jobs" component={JobNavigation}/>
@@ -67,11 +63,13 @@ function MainPage({navigation}) {
 }
 
 const JobNavigation = ({navigation , route}) => {
+  const ImageSource = useSelector(state => state.GeneralResponse.URL_SOURCE);
+
   const { landScape } = useLandScape();
 
   useBottomNavigatorVisible(
     { Pages:Pages, Style : {height: RFPercentage(landScape ? 8 : 10),
-      backgroundColor: green} },
+      backgroundColor: "#252525"} },
     { route, navigation },
   );
   return(
@@ -98,7 +96,7 @@ const CompanyNavigation = ({navigation, route}) => {
 
   useBottomNavigatorVisible(
     { Pages:Pages, Style : {height: RFPercentage(landScape ? 8 : 10),
-      backgroundColor: green} },
+      backgroundColor: "#252525"} },
     { route, navigation },
   );
 

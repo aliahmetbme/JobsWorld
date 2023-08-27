@@ -10,6 +10,14 @@ const JobsCard = React.memo(({ items , onPress}) => {
     category = items.categories.name;
   }
 
+  const converPublicationDate = (date) => {
+    // Tarih dizesini Date nesnesine çevirme
+    const dateObject = new Date(date);
+    // Tarihi istediğiniz formatında elde etme
+    const formattedDate = `${dateObject.getDate()}.${dateObject.getMonth() + 1}.${dateObject.getFullYear()}`;
+    return formattedDate
+}
+
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Text style={styles.title}>{items.name}</Text>
@@ -23,7 +31,7 @@ const JobsCard = React.memo(({ items , onPress}) => {
         <Text style={styles.category}>{category}</Text>
       </View>
       <View style={{flex:1,justifyContent:"flex-end", marginTop:RFPercentage(1)}}>
-        <Text style={styles.date}>{items.publication_date}</Text>
+        <Text style={styles.date}>{converPublicationDate(items.publication_date)}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -48,7 +56,7 @@ const styles = StyleSheet.create({
   }, 
   title: {
     fontSize:RFPercentage(2),
-    marginBottom:RFPercentage(1),
+    marginBottom:RFPercentage(2),
     fontWeight:"700"
   },
   company:{
