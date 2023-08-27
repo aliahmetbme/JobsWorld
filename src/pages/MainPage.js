@@ -6,10 +6,9 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { green } from "../Components/Colors"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import useBottomNavigatorVisible from '../Hooks/useBottomNavigatorVisible';
 import CustomHeader from '../Components/CustomHeader';
-
+import { useSelector } from 'react-redux';
 import JobsPage from "./JobsPage"
 import JobsDetail from './JobsDetail';
 import CompaniesPage from "./CompaniesPage"
@@ -20,9 +19,10 @@ const Pages =  ['CompaniesDetails', 'JobDetail']
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
 
-
 function MainPage({navigation}) {
+
   const { landScape } = useLandScape();
+  
 
   const TabBarIcon = ({ color, size, iconName }) => {
     return <Icon style={landScape ? { marginHorizontal: -RFPercentage(2) } : {}} name={iconName} size={size} color={color} />;
@@ -77,20 +77,23 @@ const JobNavigation = ({navigation , route}) => {
   return(
       <Stack.Navigator screenOptions={{headerShown:false}}>
         <Stack.Screen name='JobsPage' component={JobsPage}></Stack.Screen>  
-        <Stack.Screen name='JobDetail' component={JobsDetail} options={{headerShown:true, header: props => (
-              <CustomHeader
-                {...props}
-                IconName="backspace"
-                color=""
-                title=" "
-                leftFunction={() => navigation.navigate("JobsPage")}
-              />), navigationBarHidden:true, tabBarShowLabel:false, tabBarStyle:{display: "none"}}} ></Stack.Screen>
+        <Stack.Screen name='JobDetail' component={JobsDetail} options={{headerShown:true,
+         header: props => (
+          <CustomHeader
+            {...props}
+            leftIconName="backspace"
+            color=""
+            title=" "
+            leftFunction={() => navigation.navigate("JobsPage")}
+          />), navigationBarHidden:true, tabBarShowLabel:false}} ></Stack.Screen>
       </Stack.Navigator>
     )
 } 
 
 
 const CompanyNavigation = ({navigation, route}) => {
+  const ImageSource = useSelector(state => state.GeneralResponse.URL_SOURCE);
+
   const { landScape } = useLandScape();
 
   useBottomNavigatorVisible(
@@ -105,9 +108,10 @@ const CompanyNavigation = ({navigation, route}) => {
         <Stack.Screen name='CompaniesDetails' component={CompaniesDetails} options={{headerShown:true, header: props => (
               <CustomHeader
                 {...props}
-                IconName="backspace"
+                ImageSource={ImageSource}
+                leftIconName="backspace"
                 color=""
-                title=" "
+                title=""
                 leftFunction={() => navigation.navigate("CompaniesPage")}
               />), navigationBarHidden:true}} ></Stack.Screen>
       </Stack.Navigator>

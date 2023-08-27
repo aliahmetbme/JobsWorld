@@ -1,15 +1,13 @@
 const INITIAL_STATE = {
-    data: [],
-    loading: false
+    URL_SOURCE:""
 }
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case "GET_JOBS" :
+        case "SET_IMAGE_SOURCE" :
             return {
-            ...state,
-            loading :{...state.loading, loading:false},
-            data: action.payload}
+                ...state, URL_SOURCE: action.payload
+            }
         default: 
             return state
     }

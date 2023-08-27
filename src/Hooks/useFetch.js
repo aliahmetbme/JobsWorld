@@ -12,6 +12,7 @@ export default function useFetch(URL, id) {
     try {
       setLoading(true);
       const res = !!id ? await axios.get(`${URL}/${id}`) :  await axios.get(`${URL}?page=${page}`);
+      console.log(`${URL}/${id}`)
       const newData = res.data; // API'den gelen veriler
       if (page === 0) {
         !!id ? setData(newData): setData(newData.results);

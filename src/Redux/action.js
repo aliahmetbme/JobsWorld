@@ -1,15 +1,8 @@
-import {GET} from "../Requests/api"
 
 export const SetName = (name) => {
     return {
-        type:"GET_JOBS",
+        type:"SET_IMAGE_SOURCE",
         payload:GET
     }
 }
 
-export const SetAge = (age) => {
-    return {
-        type:"SET_AGE",
-        payload:age
-    }
-}

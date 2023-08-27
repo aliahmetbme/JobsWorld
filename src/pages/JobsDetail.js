@@ -9,23 +9,17 @@ const JobsDetail = ({ route }) => {
     const id = route.params.id
     const { data } = useFetch(URL, id)
 
-    if (!data) {
-        return <Text>Loading...</Text>;
-    }
     source = {
-        html : data.contents
+        html: data.contents
     }
     return (
         <ScrollView style={styles.container}>
-            <SafeAreaView>
-            <Text style={styles.title}>{data.name}</Text>
-            {data.contents ? (
-                <RenderHtml tagsStyles={styles.HTMLView} source={source} contentWidth={100} />
-            ) : (
-                <Text>Loading</Text>
-            )}
-                        </SafeAreaView>
-
+                <Text style={styles.title}>{data.name}</Text>
+                {data.contents ? (
+                    <RenderHtml tagsStyles={styles.HTMLView} source={source} contentWidth={100} />
+                ) : (
+                    <Text>Loading</Text>
+                )}
         </ScrollView>
     );
 }
@@ -35,7 +29,7 @@ export default JobsDetail
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding:RFPercentage(0.5)
+        padding: RFPercentage(0.5)
 
     },
     title: {

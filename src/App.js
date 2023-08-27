@@ -8,6 +8,8 @@ import { createDrawerNavigator} from '@react-navigation/drawer';
 import CustomDrawerContent from './Components/CustemDrawerContent';
 import MainPage from './pages/MainPage';
 import Profile from "./pages/Profile";
+import { Provider } from 'react-redux';
+import store from './Redux/store';
 
 
 const Drawer = createDrawerNavigator();
@@ -40,8 +42,15 @@ function Main({navigation}) {
   );
 }
 
+const AppProvider = () => {
+  return(
+    <Provider store={store}>
+      <Main></Main>
+    </Provider>
+  )
+}
 
 
-export default Main
+export default AppProvider
 
 

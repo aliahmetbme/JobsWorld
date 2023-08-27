@@ -34,9 +34,9 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     marginHorizontal:RFPercentage(1),
-    margin:RFPercentage(1),
+    margin:RFPercentage(1.5),
     backgroundColor:"#DADADA", 
-    padding:RFPercentage(1), 
+    padding:RFPercentage(1.5), 
     borderRadius:RFPercentage(1),
     elevation: 10,
     shadowOffset: {
@@ -47,15 +47,16 @@ const styles = StyleSheet.create({
     shadowRadius: 7, // Gölgelenme boyutu (blur-radius gibi)
   }, 
   title: {
-    fontSize:RFPercentage(2.5),
-    marginBottom:RFPercentage(1)
+    fontSize:RFPercentage(2),
+    marginBottom:RFPercentage(1),
+    fontWeight:"700"
   },
   company:{
-    fontWeight:"900",
-    fontSize:RFPercentage(2.5),
+    fontWeight:"500",
+    fontSize:RFPercentage(2),
   },
   category:{
-    fontSize:RFPercentage(1.75),
+    fontSize:RFPercentage(1.5),
     alignSelf:"center"
   }, 
 })

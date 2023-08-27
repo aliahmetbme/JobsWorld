@@ -1,4 +1,4 @@
-import { FlatList ,useWindowDimensions, SafeAreaView} from 'react-native'
+import { FlatList ,useWindowDimensions, SafeAreaView, View} from 'react-native'
 import React from 'react'
 
 import JobsDetail from './JobsDetail';
@@ -16,8 +16,9 @@ const Jobs = ({navigation}) => {
   const isLargeScreen = dimensions.width >= 768;
 
   try {return (
-    <SafeAreaView style={{flex:1,backgroundColor:"white"}}>
+    <View>
       <FlatList
+        ListHeaderComponent={<SafeAreaView />}
         data={data}
         showsHorizontalScrollIndicator={true} 
         numColumns={isLargeScreen ? 2 : 1}
@@ -26,7 +27,7 @@ const Jobs = ({navigation}) => {
         onEndReachedThreshold={0.1}
         ListFooterComponent={renderFooter}>  
       </FlatList>
-    </SafeAreaView>
+      </View>
   )} catch (error) {
     console.log(error)
   }
